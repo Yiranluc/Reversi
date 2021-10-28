@@ -1,2 +1,2 @@
 # Reversi
-Reversi is a game.
+Our Reversi is a web-based board game, played by two people.
