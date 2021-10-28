@@ -1,0 +1,334 @@
+#resolutionAlert {
+    visibility: hidden;
+    width: 1100px;
+    color: white;
+}
+
+@media only screen and (max-width: 1366px),
+screen and (max-height: 768px) {
+    #resolutionAlert {
+        visibility: visible;
+    }
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    background-color: #426952;
+}
+
+body:-webkit-full-screen #background {
+    background-color: #444;
+}
+
+body:-moz-full-screen #background {
+    background-color: #444;
+}
+
+body:-ms-fullscreen #background {
+    background-color: #444;
+}
+
+body:fullscreen #background {
+    background-color: #444;
+}
+
+
+body:not(:-webkit-full-screen) #background {
+    background-color: #426952;
+}
+
+body:not(:-moz-full-screen) #background {
+    background-color: #426952;
+}
+
+body:not(:-ms-fullscreen) #background {
+    background-color: #426952;
+}
+
+body:not(:fullscreen) #background {
+    background-color: #426952;
+}
+
+#background:not(:fullscreen) {
+    background-color: #426952;
+}
+
+#background {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 14fr 1fr 1fr;
+    grid-template-areas:
+        "playerOne board playerTwo"
+        "playerOne board btnSettings"
+        "playerOne board btnFullscreen";
+    width: 100%;
+    height: 100%;
+}
+
+#gameBoard {
+    grid-area: board;
+    display: grid;
+    height: 50vw;
+    width: 50vw;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-gap: 0.1em;
+    margin: auto;
+    margin-top: 8%;
+}
+
+.player_sidebar {
+    display: grid;
+    grid-template-rows: 3fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+        "playerIcon playerIcon"
+        "playerName playerName"
+        "diskIcon diskCount"
+        "timeIcon timeCount";
+    height: 60%;
+    width: 50%;
+    margin-top: 20%;
+}
+
+.player1 {
+    grid-area: playerOne;
+}
+
+.player2 {
+    grid-column: 3/4;
+    grid-row: 1/4;
+}
+
+.disk {
+    border-radius: 50%;
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 85%;
+    width: 85%;
+    box-shadow: 2px 2px 8px #2228;
+    transition: all cubic-bezier(0.39, 0.575, 0.565, 1) 0.2s;
+}
+
+.disk_black {
+    background: radial-gradient(at 35% 35%, #363636 0%, #1B1B1A 65%, #060606 100%);
+}
+
+.disk_white {
+    background: radial-gradient(at 35% 35%, #ffffff 0%, #d0d0d0 85%, #c6c6c6 100%);
+}
+
+.diskHint {
+    opacity: 0.3;
+    box-shadow: 4px 4px 8px #2224;
+}
+
+.diskHint:hover {
+    opacity: 0.85;
+    border: cadetblue solid 3px;
+}
+
+.diskHint:active {
+    opacity: 1;
+    border: gold solid 3px;
+}
+
+.hidden {
+    display: none;
+}
+
+.cell {
+    height: 100%;
+    width: 100%;
+    background-color: #72B584;
+}
+
+#cell_a1 {
+    border-top-left-radius: 25%;
+}
+
+#cell_h1 {
+    border-top-right-radius: 25%;
+}
+
+#cell_a8 {
+    border-bottom-left-radius: 25%;
+}
+
+#cell_h8 {
+    border-bottom-right-radius: 25%;
+}
+
+.profileImage {
+    grid-area: playerIcon;
+    border: 4px solid #363636;
+    width: 10vw;
+    height: 10vw;
+    border-radius: 50%;
+    margin: 0 auto;
+    background: #ffffff;
+}
+
+.infoText {
+    text-align: right;
+    height: 100%;
+    font-size: 2.5vw;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Courier, monospace;
+}
+
+.playerUsernameText {
+    grid-area: playerName;
+    text-align: center;
+    font-size: 3vw;
+    color: #ffffff;
+    font-family: sans-serif, Courier, monospace;
+}
+
+.sidebarDisk {
+    grid-area: diskIcon;
+    width: 3.5vw;
+    height: 3.5vw;
+    position: unset;
+    top: 0%;
+    transform: none;
+}
+
+.clockIcon {
+    margin: auto;
+    width: 3.5vw;
+    height: 3.5vw;
+}
+
+/* Loading icon */
+#loader-wrapper .loader-section {
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: #222222;
+    opacity: 0.8;
+    z-index: 100;
+}
+
+#loader-wrapper .loader-section.section-left {
+    left: 0;
+}
+
+#loader-wrapper .loader-section.section-right {
+    right: 0;
+}
+
+#loader-wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#coin {
+    z-index: 101;
+    position: relative;
+    margin: 0 auto;
+    top: 45%;
+    width: 6vw;
+    height: 6vw;
+    animation: flip 3s linear forwards;
+    animation-iteration-count: infinite;
+    transform-style: preserve-3d;
+}
+
+#coin div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 50%;
+    margin: auto;
+    box-shadow: 2px 2px 8px #2228;
+}
+
+.side-b {
+    transform: rotateY(-180deg);
+}
+
+@keyframes flip {
+    from {
+        transform: rotateY(0);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.saving {
+    font-size: 40px;
+}
+
+.saving span {
+    font-size: 50px;
+    animation-name: blink;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+.saving span:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.saving span:nth-child(3) {
+    animation-delay: .4s;
+}
+
+#waitingText {
+    z-index: 101;
+    position: relative;
+    top: 45%;
+    text-align: center;
+    color: #fff;
+    font-family: monospace;
+    font-size: 2vw;
+}
+
+@keyframes blink {
+    0% {
+        opacity: .2;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: .2;
+    }
+}
+
+#fullscreenIconContainer {
+    grid-area: btnFullscreen;
+    border-top-left-radius: 25%;
+    border-bottom-left-radius: 25%;
+    height: 3vw;
+    width: 3vw;
+    margin: 0 0 0 auto;
+    background-color: white;
+}
+
+#fullscreenIconContainer:hover {
+    background-color: #d0d0d0;
+}
+
+#fullscreenIconContainer img {
+    height: 100%;
+    width: 100%;
+    transform: scale(0.75);
+}
